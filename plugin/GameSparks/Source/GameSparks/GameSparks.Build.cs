@@ -10,6 +10,8 @@ public class GameSparks : ModuleRules
     public GameSparks(TargetInfo Target) // < 4.15
     #endif
     {
+        PrivatePCHHeaderFile = "Private/GameSparksPrivatePCH.h";
+
         AddDefinition("GS_BUILDING_MODULE=1");
         AddDefinition("GAMESPARKS_PACKAGE=1");
 
@@ -32,7 +34,6 @@ public class GameSparks : ModuleRules
             Path.Combine(GameSparksPath, "src", "cjson"),
             Path.Combine(GameSparksPath, "src", "easywsclient"),
             Path.Combine(GameSparksPath, "src", "google"),
-            Path.Combine(GameSparksPath, "src", "hmac"),
             Path.Combine(GameSparksPath, "src", "mbedtls"),
             Path.Combine(GameSparksPath, "src")
         });
@@ -72,11 +73,11 @@ public class GameSparks : ModuleRules
         {
             string PluginPath = Path.GetFullPath(ModulePath);
 
-//#if UE_4_19_OR_LATER
-//            RuntimeDependencies.Add(Path.Combine(PluginPath, "GameSparks_APL.xml"));
-//#else
-            AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(PluginPath, "GameSparks_APL.xml")));
-//#endif
+            #if UE_4_19_OR_LATER
+                RuntimeDependencies.Add(Path.Combine(PluginPath, "GameSparks_APL.xml"));
+            #else
+                AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(PluginPath, "GameSparks_APL.xml")));
+            #endif
         }
     }
 

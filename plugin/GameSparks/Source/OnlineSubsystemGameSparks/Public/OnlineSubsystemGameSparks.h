@@ -48,6 +48,11 @@ public:
 	virtual IOnlinePresencePtr GetPresenceInterface() const override;
 	virtual IOnlineChatPtr GetChatInterface() const override;
     virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
+
+	#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 21
+	virtual IOnlineTournamentPtr GetTournamentInterface() const override;
+	#endif
+
 	virtual bool Init() override;
 	virtual bool Shutdown() override;
 	virtual FString GetAppId() const override;
@@ -83,10 +88,9 @@ public:
 	}
 	#endif
 
-PACKAGE_SCOPE:
-
-	/** Only the factory makes instances */
-	FOnlineSubsystemGameSparks();
+PACKAGE_SCOPE:	
+	FOnlineSubsystemGameSparks() = delete;
+	explicit FOnlineSubsystemGameSparks(FName InInstanceName);
 
 private:
     FOnGameSparksAvailableDelegate OnGameSparksAvailableDelegate;

@@ -17,7 +17,7 @@ public:
 
 	virtual IOnlineSubsystemPtr CreateSubsystem(FName InstanceName)
 	{
-		FOnlineSubsystemGameSparksPtr OnlineSub = MakeShareable(new FOnlineSubsystemGameSparks());
+		FOnlineSubsystemGameSparksPtr OnlineSub = MakeShareable(new FOnlineSubsystemGameSparks(InstanceName));
 		if (OnlineSub->IsEnabled())
 		{
 			if(!OnlineSub->Init())
@@ -40,7 +40,7 @@ public:
 
 // inclusion into OnlineSubsystemNames.h ?
 #ifndef GAMESPARKS_SUBSYSTEM
-#	define GAMESPARKS_SUBSYSTEM FName(TEXT("GAMESPARKS"))
+#	define GAMESPARKS_SUBSYSTEM FName(TEXT("GameSparks"))
 #endif
 
 void FOnlineSubsystemGameSparksModule::StartupModule()

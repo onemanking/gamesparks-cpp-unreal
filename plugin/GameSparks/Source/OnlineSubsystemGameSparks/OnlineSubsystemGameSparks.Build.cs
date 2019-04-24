@@ -10,6 +10,10 @@ public class OnlineSubsystemGameSparks : ModuleRules
     public OnlineSubsystemGameSparks(TargetInfo Target) // < 4.15
     #endif
     {
+        #if UE_4_21_OR_LATER
+            PrivatePCHHeaderFile = "Private/OnlineSubsystemGameSparksPrivatePCH.h";
+        #endif
+
         AddDefinition("GAMESPARKS_PACKAGE=1");
         AddDefinition("ONLINESUBSYSTEMGAMESPARKS_PACKAGE=1");
 
@@ -24,7 +28,7 @@ public class OnlineSubsystemGameSparks : ModuleRules
             }
         );
 
-        PrivateIncludePaths.Add("Private");
+        PrivateIncludePaths.Add("OnlineSubsystemGameSparks/Private");
 
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
     }

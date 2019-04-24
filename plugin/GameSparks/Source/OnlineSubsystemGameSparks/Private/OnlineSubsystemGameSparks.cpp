@@ -119,6 +119,13 @@ IOnlineTurnBasedPtr FOnlineSubsystemGameSparks::GetTurnBasedInterface() const
     return nullptr;
 }
 
+#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 21
+IOnlineTournamentPtr FOnlineSubsystemGameSparks::GetTournamentInterface() const
+{
+	return nullptr;
+}
+#endif
+
 bool FOnlineSubsystemGameSparks::Tick(float DeltaTime)
 {
 	if (!FOnlineSubsystemImpl::Tick(DeltaTime))
@@ -164,11 +171,11 @@ bool FOnlineSubsystemGameSparks::Tick(float DeltaTime)
 void FOnlineSubsystemGameSparks::OnGameSparksAvailable(bool available)
 {
     auto currentConnectionStatus = available?EOnlineServerConnectionStatus::Type::Connected:EOnlineServerConnectionStatus::Type::NotConnected;
-    //#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 19
-    //TriggerOnConnectionStatusChangedDelegates(GetSubsystemName().ToString(), lastConnectionStatus, currentConnectionStatus);
-    //#else
+    #if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 19
+    TriggerOnConnectionStatusChangedDelegates(GetSubsystemName().ToString(), lastConnectionStatus, currentConnectionStatus);
+    #else
     TriggerOnConnectionStatusChangedDelegates(lastConnectionStatus, currentConnectionStatus);
-    //#endif
+    #endif
     lastConnectionStatus = currentConnectionStatus;
 }
 
@@ -223,9 +230,8 @@ bool FOnlineSubsystemGameSparks::IsEnabled()
 
 	return bEnableGameSparks;
 }
-
-
-FOnlineSubsystemGameSparks::FOnlineSubsystemGameSparks() 
+FOnlineSubsystemGameSparks::FOnlineSubsystemGameSparks(FName InInstanceName)
+    : FOnlineSubsystemImpl(FName(TEXT("GameSparks")), InInstanceName)
 {
     OnGameSparksAvailableDelegate = FOnGameSparksAvailableDelegate::CreateLambda([=](bool available){
         this->OnGameSparksAvailable(available);
