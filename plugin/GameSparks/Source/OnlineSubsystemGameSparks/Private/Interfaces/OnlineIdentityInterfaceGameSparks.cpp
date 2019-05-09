@@ -172,10 +172,10 @@ bool FOnlineIdentityInterfaceGameSparks::Login(int32 LocalUserNum, const FOnline
     else if(AccountCredentials.Type == "GSSteam")
     {
         GameSparks::Api::Requests::SteamConnectRequest authRequest(gs);
-		// We have to set the session ticket to be able to determine if the session is valid from Steam
+        // We have to set the session ticket to be able to determine if the session is valid from Steam
         authRequest.SetSessionTicket(TCHAR_TO_UTF8(*AccountCredentials.Token));
-		// Indicates that the server should switch to the supplied profile if it is already associated to a player. Defaults to false.
-		authRequest.SetSwitchIfPossible(true);												 
+        // Indicates that the server should switch to the supplied profile if it is already associated to a player. Defaults to false.
+        authRequest.SetSwitchIfPossible(true);												 
         authRequest.Send(AuthenticationRequest_Response);
     }
     else if(AccountCredentials.Type == "GSTwitch")

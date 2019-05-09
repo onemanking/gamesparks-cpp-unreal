@@ -122,7 +122,7 @@ IOnlineTurnBasedPtr FOnlineSubsystemGameSparks::GetTurnBasedInterface() const
 #if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 21
 IOnlineTournamentPtr FOnlineSubsystemGameSparks::GetTournamentInterface() const
 {
-	return nullptr;
+    return nullptr;
 }
 #endif
 

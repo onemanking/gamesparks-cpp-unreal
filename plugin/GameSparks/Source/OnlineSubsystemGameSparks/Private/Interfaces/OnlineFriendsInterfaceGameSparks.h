@@ -43,9 +43,9 @@ class FOnlineFriendsInterfaceGameSparks : public IOnlineFriends
             virtual void DumpBlockedPlayers() const override;
         #endif
 		
-		#if GS_UE_VERSION >= GS_MAKE_VERSION(4,21)
-			virtual void DumpRecentPlayers() const override {};
-		#endif
+        #if GS_UE_VERSION >= GS_MAKE_VERSION(4,21)
+            virtual void DumpRecentPlayers() const override {};
+        #endif
     private:
         GameSparks::Core::GS& GetGSInstance(int32 LocalUserNum);
 
