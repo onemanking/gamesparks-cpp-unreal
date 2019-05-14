@@ -47,7 +47,12 @@ public:
 	virtual IOnlineMessagePtr GetMessageInterface() const override;
 	virtual IOnlinePresencePtr GetPresenceInterface() const override;
 	virtual IOnlineChatPtr GetChatInterface() const override;
-    virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
+
+	#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 22
+	virtual IOnlineStatsPtr GetStatsInterface() const override;
+	#endif
+
+	virtual IOnlineTurnBasedPtr GetTurnBasedInterface() const override;
 
 	#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 21
 	virtual IOnlineTournamentPtr GetTournamentInterface() const override;

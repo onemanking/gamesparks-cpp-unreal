@@ -114,6 +114,14 @@ IOnlineChatPtr FOnlineSubsystemGameSparks::GetChatInterface() const
 	return nullptr;
 }
 
+
+#if ENGINE_MAJOR_VERSION >= 4 && ENGINE_MINOR_VERSION >= 22
+IOnlineStatsPtr FOnlineSubsystemGameSparks::GetStatsInterface() const
+{
+	return nullptr;
+}
+#endif
+
 IOnlineTurnBasedPtr FOnlineSubsystemGameSparks::GetTurnBasedInterface() const
 {
     return nullptr;
